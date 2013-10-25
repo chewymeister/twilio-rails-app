@@ -7,4 +7,3 @@ Feature: Sending a message using the Twilio API
     And I enter the message "Hello, world"
     And I click the button "Send Message" to submit the form
     Then I should receive the message "Message successfully sent"
-    

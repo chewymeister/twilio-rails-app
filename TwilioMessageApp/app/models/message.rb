@@ -1,9 +1,4 @@
 class Message < ActiveRecord::Base
-  after_initialize :init
-
-  def init
-    self.status ||= 'false'
-  end
 
   def new_twilio_client account_sid, authentication_token
     Twilio::REST::Client.new(account_sid, authentication_token)
