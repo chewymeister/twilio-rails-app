@@ -7,14 +7,14 @@ class MessagesController < ApplicationController
   end
 
   def create
-    number = params[:message][:number]
+    to_number = params[:message][:number_to]
     content = params[:message][:content]
-    from_number = ENV['TWILIO_LIVE_SMS_NUMBER']
+    from_number = provide_from_number
     @message = Message.create message_params
-    client = @message.new_twilio_client ENV['TWILIO_LIVE_SID'], ENV['TWILIO_LIVE_TOKEN']
-    @message.send_text(client,'+441904500952', number, content)
+    client = new_twilio_client provide_sid, provide_token 
+    @message.send_text( client, to_number.to_s, from_number, content )
 
-    if @message.status == 'queued'
+    if @message
       flash[:notice] = 'Your message was successfully sent'
       redirect_to root_path
     else
@@ -26,5 +26,37 @@ class MessagesController < ApplicationController
   private
     def message_params
       params.require(:message).permit(:number_to, :content)
+    end
+
+    def provide_from_number
+      if test_environment?
+        ENV['TWILIO_TEST_SMS_FROM_NUMBER']
+      elsif dev_environment?
+        ENV['TWILIO_LIVE_SMS_NUMBER']
+      end
+    end
+
+    def provide_sid
+      if test_environment?
+        TEST_SID
+      elsif dev_environment?
+        ENV['TWILIO_LIVE_SID']
+      end
+    end
+
+    def provide_token
+      if test_environment?
+        TEST_TOKEN
+      elsif dev_environment?
+        ENV['TWILIO_LIVE_TOKEN']
+      end
+    end
+
+    def test_environment?
+      Rails.env.test?
+    end
+
+    def dev_environment?
+      Rails.env.development?
     end
 end
