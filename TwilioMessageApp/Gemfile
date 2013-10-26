@@ -34,6 +34,9 @@ gem 'devise'
 
 gem 'twilio-ruby'
 
+#Use HAML instead of ERB
+gem 'haml'
+
 group :production do
   gem 'rails_12factor'
 end
