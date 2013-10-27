@@ -13,4 +13,4 @@ Feature: User signs in
   When the user goes to the sign in page
   And the user signs in with the email "test@test.com" and the incorrect password "wrong_password"
   Then the user will reach the sign in page again
-  And the user will see the message "Your email or your password did not match. Please try again"
+  # And the user will see the message "Your email or your password did not match. Please try again"
