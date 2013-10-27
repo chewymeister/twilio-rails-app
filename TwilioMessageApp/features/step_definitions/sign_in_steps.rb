@@ -1,19 +1,20 @@
 Given(/^the user has an account on the database with the email "(.*?)"$/) do |email|
-  expect(has_account email ).to be_true
+  expect(has_account? email ).to be_true
 end
 
-When(/^the user goes to the sign up page at "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+When(/^the user goes to the sign in page$/) do
+  visit new_user_session_path
 end
 
-When(/^the user signs in with the email "(.*?)" and the password "(.*?)"$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+When(/^the user signs in with the email "(.*?)" and the password "(.*?)"$/) do |email, password|
+  # raise(page.html)
+  sign_in email, password
 end
 
-Then(/^the user will reach the quizzes index page located at "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^the user will reach the index page$/) do
+  expect(current_path).to eq root_path
 end
 
-Then(/^the user will see the message "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^the user will see the message "(.*?)"$/) do |message|
+  expect(page).to have_content message
 end

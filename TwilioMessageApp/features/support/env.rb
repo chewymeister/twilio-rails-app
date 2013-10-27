@@ -38,8 +38,8 @@ end
 
 Before '@registered_user' do
   User.create( email: 'test@test.com',
-               password: 'test', 
-               password_confirmation: 'test' )
+               password: 'password', 
+               password_confirmation: 'password' )
 end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
