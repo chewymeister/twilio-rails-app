@@ -1,1 +1,9 @@
-= link_to 'New message', new_message_path
+%h1
+  Fill in your message here!
+
+= form_for @message do |f|
+  = f.label :number_to, 'Number'
+  = f.text_field :number_to
+  = f.label :content, 'Content'
+  = f.text_field :content
+  = f.submit 'Send Message'

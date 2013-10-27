@@ -1,5 +1,5 @@
 Given(/^I am on the new message page located at "(.*?)"$/) do |arg1|
-  visit new_message_path
+  visit root_path
 end
 
 When(/^I enter the phone number "(.*?)"$/) do |number|
