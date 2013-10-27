@@ -9,4 +9,9 @@ Feature: User signs up for an account
   Then the number of users will equal "1"
   And the user now has an account on the database with the email "test@test.com"
 
-  
+  Scenario: When the user tries to sign up without an email
+  When the user goes to the sign up page
+  When the user signs up with no email and the password "test" with the password confirmation "test"
+  Then the number of users will not equal "1"
+  And sees the message "you must fill in your email"
+

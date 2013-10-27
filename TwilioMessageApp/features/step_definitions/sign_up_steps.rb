@@ -1,3 +1,5 @@
+#User has no account
+
 Given(/^the user has no account on the database with the email "(.*?)"$/) do |email|
   expect(has_account? email).to be_false
 end
@@ -16,4 +18,18 @@ end
 
 Then(/^the user now has an account on the database with the email "(.*?)"$/) do |email|
   expect(has_account? email).to be_true
+end
+
+#When user signs up without email
+
+When(/^the user signs up with no email and the password "(.*?)" with the password confirmation "(.*?)"$/) do |password, password_confirmation|
+  sign_up('' , password, password_confirmation)
+end
+
+Then(/^the number of users will not equal "(.*?)"$/) do |number|
+  expect(User.count).to_not eq number
+end
+
+Then(/^sees the message "(.*?)"$/) do |message|
+  expect(page).to have_content message
 end
