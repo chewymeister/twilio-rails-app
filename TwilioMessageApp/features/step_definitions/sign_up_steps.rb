@@ -30,6 +30,6 @@ Then(/^the number of users will not equal "(.*?)"$/) do |number|
   expect(User.count).to_not eq number
 end
 
-Then(/^sees the message "(.*?)"$/) do |message|
+Then(/^the user sees the message "(.*?)"$/) do |message|
   expect(page).to have_content message
 end

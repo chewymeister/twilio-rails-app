@@ -5,4 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates_presence_of :email, message: "you must fill in your email"
+  validates_presence_of :password, message: "you must fill in a password"
+  validates_presence_of :password_confirmation, message: "you must confirm your password"
+  validates_confirmation_of :password, message: "Your password didn't match. Please try again"
 end

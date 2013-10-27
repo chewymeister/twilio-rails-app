@@ -13,5 +13,10 @@ Feature: User signs up for an account
   When the user goes to the sign up page
   When the user signs up with no email and the password "test" with the password confirmation "test"
   Then the number of users will not equal "1"
-  And sees the message "you must fill in your email"
+  And the user sees the message "you must fill in your email"
 
+  Scenario: When the user tries to sign up with passwords that don't match
+  When the user goes to the sign up page
+  When the user signs up with the email "test@test.com" and the password "password" with the password confirmation "wrong_password"
+  Then the number of users will not equal "1"
+  And the user sees the message "Your password didn't match. Please try again"
