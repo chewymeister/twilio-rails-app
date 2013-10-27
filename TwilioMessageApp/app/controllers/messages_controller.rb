@@ -6,21 +6,24 @@ class MessagesController < ApplicationController
     @message = Message.new
   end
 
-  def create
-    to_number = params[:message][:number_to]
-    content = params[:message][:content]
-    from_number = provide_from_number
-    @message = Message.create message_params
-    client = new_twilio_client provide_sid, provide_token 
-    @message.send_text( client, to_number.to_s, from_number, content )
 
-    if @message
-      flash[:notice] = 'Your message was successfully sent'
+#PROBLEM WITH IF LOGIC, DOESN'T CATCH SEND TEXT ERRORS
+  def create
+    to_number, content = params[:message][:number_to], params[:message][:content]
+    from_number = provide_from_number
+    client = new_twilio_client provide_sid, provide_token
+    @message = Message.create message_params
+    sid = @message.send_text( client, to_number, from_number, content ).sid
+    response = client.account.messages.get sid
+
+    if response.status == 'sent'
+      flash[:notice] = 'Your message was sent successfully'
       redirect_to root_path
     else
-      flash[:error] = ['Did not send message, please try again']
+      flash[:error] = ['Message did not send successfully, please try again']
       redirect_to new_message_path
     end
+
   end
 
   private
@@ -30,7 +33,7 @@ class MessagesController < ApplicationController
 
     def provide_from_number
       if test_environment?
-        ENV['TWILIO_TEST_SMS_FROM_NUMBER']
+        TEST_VALID_FROM_NUMBER
       elsif dev_environment?
         ENV['TWILIO_LIVE_SMS_NUMBER']
       end
