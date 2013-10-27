@@ -5,6 +5,10 @@ class SessionsController < Devise::SessionsController
 
   def create
     super
-    flash[:notice] = "Welcome test@test.com! Choose a valid mobile number to send a text message to!"
+    # if current_user
+      flash[:notice] = "Welcome #{@user.email}! Choose a valid mobile number to send a text message to!"
+    # else
+      # flash[:error] = ["Your email or password did not match. Please try again"]
+    # end
   end
 end
