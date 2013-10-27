@@ -1,4 +1,7 @@
 class MessagesController < ApplicationController
+
+  rescue_from Twilio::REST::RequestError, :with => :catch_exception
+
   def index
   end
 
@@ -6,29 +9,49 @@ class MessagesController < ApplicationController
     @message = Message.new
   end
 
-
-#PROBLEM WITH IF LOGIC, DOESN'T CATCH SEND TEXT ERRORS
   def create
-    to_number, content = params[:message][:number_to], params[:message][:content]
-    from_number = provide_from_number
-    client = new_twilio_client provide_sid, provide_token
+    @to_number, @content = params[:message][:number_to], params[:message][:content]
+    @from_number = provide_from_number
+    @client = new_twilio_client provide_sid, provide_token
     @message = Message.create message_params
-    sid = @message.send_text( client, to_number, from_number, content ).sid
-    response = client.account.messages.get sid
 
-    if response.status == 'sent'
-      flash[:notice] = 'Your message was sent successfully'
-      redirect_to root_path
-    else
-      flash[:error] = ['Message did not send successfully, please try again']
-      redirect_to new_message_path
+    if test_environment?
+      test_redirect_message
+    elsif development_environment?
+      development_redirect_message
     end
 
   end
 
   private
     def message_params
-      params.require(:message).permit(:number_to, :content)
+      params.require(:message).permit(:number_to, :@content)
+    end
+
+    def catch_exception
+      flash[:errors] = ['Message did not send successfully, please try again']
+      redirect_to new_message_path
+    end
+
+    def development_redirect_message
+      sid = @message.send_text( @client, @to_number, @from_number, @content ).sid
+      response = @client.account.messages.get sid
+      if response.status == 'sent'
+        flash[:notice] = 'Your message was successfully sent'
+        redirect_to root_path
+      else
+        catch_exception
+      end
+    end
+
+    def test_redirect_message
+      status = @message.send_text( @client, @to_number, @from_number, @content ).status
+      if status == 'queued'
+        flash[:notice] = 'Your message was successfully sent'
+        redirect_to root_path
+      else
+        catch_exception
+      end
     end
 
     def provide_from_number
