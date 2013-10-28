@@ -4,7 +4,6 @@ Given(/^the user "(.*?)" has signed in with the password "(.*?)"$/) do |email, p
 end
 
 Then(/^the user clicks the "(.*?)" link$/) do |link|
-  # raise(current_path)
   click_link link
 end
 
