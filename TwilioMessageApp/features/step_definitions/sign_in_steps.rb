@@ -1,3 +1,5 @@
+# Correct password
+
 Given(/^the user has an account on the database with the email "(.*?)"$/) do |email|
   expect(has_account? email ).to be_true
 end
@@ -15,7 +17,6 @@ Then(/^the user will reach the index page$/) do
 end
 
 Then(/^the user will see the message "(.*?)"$/) do |message|
-  # raise(page.html)
   expect(page).to have_content message
 end
 

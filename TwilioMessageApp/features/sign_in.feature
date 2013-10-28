@@ -1,6 +1,8 @@
 @registered_user
 Feature: User signs in
 
+  A user should be able to sign in with their email and password
+
   Scenario: with the correct password
   Given the user has an account on the database with the email "test@test.com"
   When the user goes to the sign in page
