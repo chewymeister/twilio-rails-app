@@ -6,6 +6,10 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
+    %header 
+      %nav 
+        %li 
+          = link_to 'Sign out', destroy_user_session_path, method: 'delete'
     - if flash[:notice]
       #notice
         = flash[:notice]

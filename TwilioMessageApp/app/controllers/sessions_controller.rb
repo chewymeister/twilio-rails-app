@@ -7,4 +7,9 @@ class SessionsController < Devise::SessionsController
     super
     flash[:notice] = "Welcome #{@user.email}! Choose a valid mobile number to send a text message to!"
   end
+
+  def destroy
+    super
+    flash[:notice] = "Goodbye!"
+  end
 end
