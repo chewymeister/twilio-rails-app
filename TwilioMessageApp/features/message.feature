@@ -15,3 +15,10 @@ Feature: Sending a message using the Twilio API
     And I enter the message "Hello, world"
     And I click the button "Send Message" to submit the form
     Then I should receive the message "Message did not send successfully, please try again"
+
+  Scenario: User must be signed in to send a text message
+    Given I am on the root page
+    And I am not signed in
+    Then I should not see the message "Fill in your message here!"
+    And I should see the message "You need to sign in before you can send a text"
+    
