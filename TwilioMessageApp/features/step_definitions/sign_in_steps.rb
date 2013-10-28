@@ -5,7 +5,6 @@ Given(/^the user has an account on the database with the email "(.*?)"$/) do |em
 end
 
 When(/^the user clicks the link "(.*?)"$/) do |link|
-  # raise(page.html)
   visit root_path
   click_link link
 end
