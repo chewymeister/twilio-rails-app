@@ -4,8 +4,10 @@ Given(/^the user has an account on the database with the email "(.*?)"$/) do |em
   expect(has_account? email ).to be_true
 end
 
-When(/^the user goes to the sign in page$/) do
-  visit new_user_session_path
+When(/^the user clicks the link "(.*?)"$/) do |link|
+  # raise(page.html)
+  visit root_path
+  click_link link
 end
 
 When(/^the user signs in with the email "(.*?)" and the password "(.*?)"$/) do |email, password|
