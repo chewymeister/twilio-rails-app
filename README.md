@@ -7,10 +7,10 @@ After learning how to make a simple e-commerce website using Stripe, Paperclip a
 
 Requirements:
 
-Ability to send a text message to your phone using Twilio
+- Ability to send a text message to your phone using Twilio
 
-Ability to sign up, login and logout using Devise
+- Ability to sign up, login and logout using Devise
 
-Ability to buy credit to send text messages using Stripe
+- Ability to buy credit to send text messages using Stripe
 
-User cannot send a text message without sufficient credit
+- User cannot send a text message without sufficient credit
