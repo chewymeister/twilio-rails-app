@@ -2,7 +2,8 @@
 
 This application is written in Ruby 2.0.0 and uses the Rails 4 framework.
 
-##Week 9 Makers Academy - Test After learning how to make a simple e-commerce website using Stripe, Paperclip and Devise, a simple test was given to us to complete over the weekend.
+###Week 9 Makers Academy - Test 
+After learning how to make a simple e-commerce website using Stripe, Paperclip and Devise, a simple test was given to us to complete over the weekend.
 
 Requirements:
 
