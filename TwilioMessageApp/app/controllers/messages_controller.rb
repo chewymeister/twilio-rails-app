@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-
+  before_filter :auth_user
   rescue_from Twilio::REST::RequestError, :with => :catch_exception
 
   def index
@@ -14,12 +14,19 @@ class MessagesController < ApplicationController
 
     if test_environment?
       send_test_text_and_show_message
-    elsif development_environment?
+    elsif dev_environment?
       send_live_text_and_show_message
     end
   end
 
   private
+    def auth_user
+      unless user_signed_in?
+        flash[:notice] = "You need to sign in before you can send a text"
+        redirect_to new_user_session_path
+      end
+    end
+
     def message_params
       params.require(:message).permit(:number_to, :@content)
     end

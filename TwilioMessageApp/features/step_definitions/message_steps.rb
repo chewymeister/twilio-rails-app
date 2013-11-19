@@ -1,4 +1,5 @@
-Given(/^I am on the new message page located at "(.*?)"$/) do |arg1|
+Given(/^I am on the new message page$/) do
+  # expect(User.count).to eq 1
   visit root_path
 end
 
@@ -20,4 +21,14 @@ end
 Then(/^I should receive the message "(.*?)"$/) do |message|
   expect(page).to have_content message
 end
+
+# USER MUST BE SIGNED IN TO SEND A TEXT MESSAGE
+Given(/^I visit the root page without signing in$/) do
+  visit root_path
+end
+
+Then(/^I should see the message "(.*?)"$/) do |message|
+  expect(page).to have_content message
+end
+
 
