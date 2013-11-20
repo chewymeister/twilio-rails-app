@@ -1,3 +1,4 @@
+@registered_user
 Feature: Sending a message using the Twilio API
   
   The user should be able to send a simple message to a given phone number
