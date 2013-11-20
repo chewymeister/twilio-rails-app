@@ -1,0 +1,11 @@
+= form_tag transactions_path do
+
+  = label_tag :amount, "How much would you like to credit your account?"
+  = text_field_tag :amount
+
+  - data_key = "#{ Rails.configuration.stripe[:publishable_key] }"
+  %script(src="https://checkout.stripe.com/v2/checkout.js" class="stripe-button"
+          data-key = data_key
+          data-description = "A month's subscription"
+          data-amount=""
+          data-currency="gbp")

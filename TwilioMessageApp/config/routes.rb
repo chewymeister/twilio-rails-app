@@ -8,6 +8,7 @@ TwilioMessageApp::Application.routes.draw do
   # root 'welcome#index'
   root 'messages#index'
   resources :messages
+  resources :transactions, only:[:new, :create]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
