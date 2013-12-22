@@ -10,7 +10,8 @@ def sign_up email='', password='', password_confirmation=''
 end
 
 def sign_in email='', password=''
-  fill_in 'user[email]', with: email
-  fill_in 'user[password]', with: password
+  visit new_user_session_path
+  fill_in 'user_email', with: email
+  fill_in 'user_password', with: password
   click_button 'Sign in'
 end

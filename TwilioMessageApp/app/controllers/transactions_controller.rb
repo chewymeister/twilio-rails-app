@@ -7,24 +7,28 @@ class TransactionsController < ApplicationController
 
   def create
     # Amount in cents
-    @amount = params[:amount]
+    @amount = to_pennies params[:amount]
     token = params[:stripeToken]
-    @transaction = Transaction.new amount: params[:amount]
-    @user = User.find current_user
+    @transaction = Transaction.new transaction_amount: @amount
+    @transaction.attempt_charge @amount, token
+    @user = User.find current_user.id
+    puts "HELLO #{@user.credit}"
+    @user.credit += @amount
 
-    if @transaction.attempt_charge(@amount, token) == 'successful'
-      @user.credit += @amount
-      redirect_to root_path
-      flash[:notice] = "Thanks, your credit is now £#{@user.credit}!"
-    else
-      # rescue Stripe::CardError => e
-        flash[:error] = 'error'
-        redirect_to new_transaction_path
-      # end
-    end
+
+    flash[:notice] = "Your credit is now £#{present_in_pounds @user.credit}"
+    redirect_to root_path
   end
 
   private
+  def to_pennies amount
+    (amount.to_f * 100).round
+  end
+  
+  def present_in_pounds pennies
+    pounds = pennies.to_f / 100
+    sprintf('%.2f', pounds)
+  end
 
   def auth_user
     unless user_signed_in?

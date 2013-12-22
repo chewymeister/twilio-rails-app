@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://AC9bd6d3204795d4bcbc0525c9a868fa60:b340e7741f62190d13ef9f36e34a7974@api.twilio.com/2010-04-01/Accounts/AC9bd6d3204795d4bcbc0525c9a868fa60/SMS/Messages.json
+    body:
+      encoding: US-ASCII
+      string: From=%2B15005550006&To=%2B15005550001&Body=Hello%2C+world
+    headers:
+      Accept:
+      - application/json
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - twilio-ruby/3.11.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Date:
+      - Sun, 22 Dec 2013 20:49:44 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '157'
+      Connection:
+      - close
+      Etag:
+      - ''
+      Last-Modified:
+      - ''
+      X-Powered-By:
+      - AT-5000
+      X-Shenanigans:
+      - none
+    body:
+      encoding: UTF-8
+      string: '{"code":21211,"message":"The ''To'' number +15005550001 is not a valid
+        phone number.","more_info":"https:\/\/www.twilio.com\/docs\/errors\/21211","status":400}'
+    http_version: 
+  recorded_at: Sun, 22 Dec 2013 20:49:43 GMT
+recorded_with: VCR 2.8.0

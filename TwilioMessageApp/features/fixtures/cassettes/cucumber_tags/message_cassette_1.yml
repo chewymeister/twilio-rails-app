@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://AC9bd6d3204795d4bcbc0525c9a868fa60:b340e7741f62190d13ef9f36e34a7974@api.twilio.com/2010-04-01/Accounts/AC9bd6d3204795d4bcbc0525c9a868fa60/SMS/Messages.json
+    body:
+      encoding: US-ASCII
+      string: From=%2B15005550006&To=%2B447735989592&Body=Hello%2C+world
+    headers:
+      Accept:
+      - application/json
+      Accept-Charset:
+      - utf-8
+      User-Agent:
+      - twilio-ruby/3.11.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Date:
+      - Sun, 22 Dec 2013 20:49:43 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '521'
+      Connection:
+      - close
+      Etag:
+      - ''
+      X-Powered-By:
+      - AT-5000
+      X-Shenanigans:
+      - none
+    body:
+      encoding: UTF-8
+      string: '{"sid":"SM7fbbc363f51ba8a7e85aa1da97fc7ba0","date_created":"Sun, 22
+        Dec 2013 20:49:43 +0000","date_updated":"Sun, 22 Dec 2013 20:49:43 +0000","date_sent":null,"account_sid":"AC9bd6d3204795d4bcbc0525c9a868fa60","to":"+447735989592","from":"+15005550006","body":"Hello,
+        world","status":"queued","direction":"outbound-api","api_version":"2010-04-01","price":null,"price_unit":"USD","uri":"\/2010-04-01\/Accounts\/AC9bd6d3204795d4bcbc0525c9a868fa60\/SMS\/Messages\/SM7fbbc363f51ba8a7e85aa1da97fc7ba0.json","num_segments":"1"}'
+    http_version: 
+  recorded_at: Sun, 22 Dec 2013 20:49:43 GMT
+recorded_with: VCR 2.8.0
